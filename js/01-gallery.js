@@ -31,19 +31,29 @@ function onDivImagesClick(evt) {
     return;
   }
 
-  const instance = basicLightbox.create(`
-    <img src="${evt.target.dataset.source}" width="800" height="600">
-`);
-  instance.show();
+  const instance = basicLightbox.create(
+    `<img src="${evt.target.dataset.source}" width="800" height="600">`,
+    {
+      onShow: (instance) => {
+        galeryDiv.addEventListener("keydown", closePicture);
+      },
 
-  galeryDiv.addEventListener("keydown", (evt) => {
-    if (evt.code === "Escape") {
-      instance.close();
+      onClose: (instance) => {
+        galeryDiv.removeEventListener("keydown", closePicture);
+      },
     }
-  });
+  );
+
+  instance.show();
 
   // Заборона відкриття по посиланню
   blockAction(evt);
+}
+
+function closePicture(instance) {
+  if (evt.code === "Escape") {
+    instance.close();
+  }
 }
 
 function blockAction(evt) {
