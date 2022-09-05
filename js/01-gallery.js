@@ -48,16 +48,16 @@ function onDivImagesClick(evt) {
 
   // Заборона відкриття по посиланню
   blockAction(evt);
-}
 
-function closeModal(evt) {
-  if (evt.code === "Escape") {
-    instance.close();
+  // Закриття по кнопці Escape
+  function closeModal(evt) {
+    if (evt.code === "Escape") {
+      instance.close();
+    }
   }
 }
 
+// Заборона дефолтного обновлення сторінки
 function blockAction(evt) {
   evt.preventDefault();
 }
-
-console.log(galleryItems);
