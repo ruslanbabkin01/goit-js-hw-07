@@ -34,12 +34,12 @@ function onDivImagesClick(evt) {
   const instance = basicLightbox.create(
     `<img src="${evt.target.dataset.source}" width="800" height="600">`,
     {
-      onShow: (instance) => {
-        galeryDiv.addEventListener("keydown", closePicture);
+      onShow: () => {
+        window.addEventListener("keydown", closeModal);
       },
 
-      onClose: (instance) => {
-        galeryDiv.removeEventListener("keydown", closePicture);
+      onClose: () => {
+        window.removeEventListener("keydown", closeModal);
       },
     }
   );
@@ -50,7 +50,7 @@ function onDivImagesClick(evt) {
   blockAction(evt);
 }
 
-function closePicture(instance) {
+function closeModal(evt) {
   if (evt.code === "Escape") {
     instance.close();
   }
